@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+  
+ 
+</head>
+<body>
+  <h1>Sign Up</h1>
+  <form id="signupForm">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br><br>
+    
+    <input type="submit" value="Sign Up">
+  </form>
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js" type="module"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js" type="module"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js" type="module"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js" type="module"></script>
+  <script type="module">
+    // Initialize Firebase
+    const firebaseConfig = {
+  apiKey: "AIzaSyBOlxra0dhIHTC7QV7VaA61PlnzrRBnxWY",
+  authDomain: "authentication-9bd5e.firebaseapp.com",
+  databaseURL: "https://authentication-9bd5e-default-rtdb.firebaseio.com",
+  projectId: "authentication-9bd5e",
+  storageBucket: "authentication-9bd5e.appspot.com",
+  messagingSenderId: "1096341201743",
+  appId: "1:1096341201743:web:9b666f04949bca2dd09b3a"
+};
+
+    firebase.initializeApp(firebaseConfig);
+
+    const signUpForm = document.getElementById('signupForm');
+
+    signUpForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // User registration successful
+          console.log("User registered successfully:", userCredential.user);
+          // You can redirect the user to another page or perform additional actions here
+        })
+        .catch((error) => {
+          // Handle errors during registration
+          console.log("Error registering user:", error.message);
+        });
+    });
+  </script>
+</body>
+</html>
